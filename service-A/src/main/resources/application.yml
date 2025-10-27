@@ -1,0 +1,32 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: service-A
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      Service_A:
+        register-health-indicator: true
+        sliding-window-size: 100
+        failure-rate-threshold: 50
+        minimum-number-of-calls: 5
+        sliding-window-type: TIME_BASED
+
