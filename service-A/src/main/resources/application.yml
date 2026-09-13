@@ -16,6 +16,7 @@ management:
         include:
           - health
           - info
+          - metrics
   endpoint:
     health:
       show-details: ALWAYS
@@ -30,3 +31,9 @@ resilience4j:
         minimum-number-of-calls: 5
         sliding-window-type: TIME_BASED
 
+  ratelimiter:
+    instances:
+      Service_A:
+        limit-for-period: 3
+        limit-refresh-period: 10s
+        timeout-duration: 0s
